@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SpakujSe</string>
+    <string name="spakuj_se">Spakuj Se</string>
+    <string name="putovanje">Putovanje</string>
+    <string name="placeholder">Unesite stavku</string>
+    <string name="moj_odabir">Moj Odabir</string>
+    <string name="moja_lista">Moja Lista</string>
+    <string name="reset">Vrati Na Početno Stanje</string>
+    <string name="placeholder1">Pretraga</string>
+</resources>

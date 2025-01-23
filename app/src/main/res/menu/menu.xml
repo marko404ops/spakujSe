@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/mojOdabir"
+        android:title="@string/moj_odabir"/>
+
+    <item android:id="@+id/mojaLista"
+        android:title="@string/moja_lista"/>
+
+    <item android:id="@+id/reset"
+        android:title="@string/reset"/>
+
+    <item android:id="@+id/pretraga"
+        android:title="@string/placeholder1"
+        android:icon="@drawable/pretraga"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+
+</menu>
