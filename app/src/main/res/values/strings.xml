@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">SpakujSe</string>
     <string name="spakuj_se">Spakuj Se</string>
+    <string name="loading">Vaša pomoć pri pakovanju</string>
     <string name="putovanje">Putovanje</string>
-    <string name="placeholder">Unesite stavku</string>
+    <string name="placeholder">Dodajte novu stavku</string>
     <string name="moj_odabir">Moj Odabir</string>
     <string name="moja_lista">Moja Lista</string>
     <string name="reset">Vrati Na Početno Stanje</string>
     <string name="placeholder1">Pretraga</string>
+    <string name="appwidget_text">Spakuj Se - Moj Odabir</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

@@ -15,19 +15,21 @@ import com.example.spakujse.podaci.Podaci;
 
 import java.util.ArrayList;
 import java.util.List;
+// Glavna aktivnost aplikacije - prikazuje osnovni interfejs sa RecyclerView elementima.
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<String> naslovi;
     List<Integer> slike;
-    Adapter adapter;
+    Adapter adapter;// Adapter koji povezuje podatke sa RecyclerView-om.
     RoomBaza bazapozadataka;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Postavlja izgled aktivnosti iz XML fajla.
 //        getSupportActionBar().hide();
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         cuvajPodatkeAplikacije();
         bazapozadataka = RoomBaza.getInstance(this);
         System.out.println("-------------------->" + bazapozadataka.glDao().dobaviSveSelektovano(false).get(0).getNaziv());
-
+        // Postavlja adapter i menadžer izgleda za RecyclerView.
         adapter = new Adapter(this, naslovi, slike, MainActivity.this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cuvajPodatkeAplikacije(){
+        // Čuva podatke u SharedPreferences i proverava da li je aplikacija prvi put pokrenuta.
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -52,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
         Podaci podaci = new Podaci(bazapozadataka);
         int poslednjaV = preferences.getInt(Podaci.POSLEDNJA_VERZIJA, 0);
         if (!preferences.getBoolean(Konstanta.PRVO_POKRETANJE, false)){
+            // Prvo pokretanje aplikacije - čuva osnovne podatke.
             podaci.cuvajPodatke();
             editor.putBoolean(Konstanta.PRVO_POKRETANJE, true);
             editor.commit();
         }else if(poslednjaV<Podaci.NOVA_VERZIJA){
+            // Ako je aplikacija ažurirana, briše stare podatke i čuva nove.
             bazapozadataka.glDao().obrisiSveHardcodedStavke(Konstanta.SYSTEM);
             podaci.cuvajPodatke();
             editor.putInt(Podaci.POSLEDNJA_VERZIJA,Podaci.NOVA_VERZIJA);

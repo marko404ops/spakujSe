@@ -22,6 +22,7 @@ import com.example.spakujse.model.Stavke;
 
 import java.util.List;
 
+// Adapter za RecyclerView koji upravlja listom stavki
 public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder>{
 
     Context context;
@@ -44,19 +45,23 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
     @NonNull
     @Override
     public CheckListaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflater kreira prikaz za svaku stavku u RecyclerView-u
         return new CheckListaViewHolder(LayoutInflater.from(context).inflate(R.layout.check_lista_stavke,parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull CheckListaViewHolder holder, int position) {
+        // Postavljanje teksta i stanja checkbox-a za određenu stavku
         holder.checkBox.setText(stavkeList.get(position).getNaziv());
         holder.checkBox.setChecked(stavkeList.get(position).getIzabrano());
 
+        // Prikaz ili sakrivanje dugmeta za brisanje i menjanje pozadine stavke
         if (Konstanta.FALSE_STRING.equals(show)){
             holder.btnDelete.setVisibility(View.GONE);
             holder.layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.border1));
 
         }else {
+            // Promena pozadine u zavisnosti od stanja stavke
             if (stavkeList.get(position).getIzabrano()){
                 holder.layout.setBackgroundColor(Color.parseColor("#273C41"));
             }else {
@@ -64,6 +69,7 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
             }
         }
 
+        // Postavljanje logike za klik na checkbox
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +82,8 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
                 else {
                     stavkeList.get(position).setIzabrano(check);
                     notifyDataSetChanged();
+
+                    // Prikazivanje poruke o promeni stanja stavke
                     Toast toastPoruka = null;
                     if (toastPoruka != null){
                         toastPoruka.cancel();
@@ -90,6 +98,7 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
             }
         });
 
+        // Postavljanje logike za klik na dugme za brisanje stavke
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +115,7 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
                         }).setNegativeButton("Otkaži", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                // Zatvaranje dijaloga bez akcije
                             }
                         }).setIcon(R.drawable.delete1)
                         .show();
@@ -122,6 +131,7 @@ public class CheckListaAdapter extends RecyclerView.Adapter<CheckListaViewHolder
 
 }
 
+// ViewHolder klasa za držanje referenci na elemente prikaza
 class CheckListaViewHolder extends RecyclerView.ViewHolder{
 
     LinearLayout layout;

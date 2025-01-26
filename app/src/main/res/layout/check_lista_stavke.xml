@@ -18,6 +18,7 @@
         android:id="@+id/checkbox"
         android:layout_gravity="center"
         android:text="test test test test"
+        android:textColor="@color/beige"
         android:textSize="20sp"/>
 
     <Button

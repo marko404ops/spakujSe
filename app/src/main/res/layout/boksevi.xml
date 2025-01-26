@@ -11,8 +11,9 @@
         android:id="@+id/LinearLayout"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/beige"
-        android:padding="10dp"
+        android:background="@drawable/rounded_corner_background"
+        android:dividerPadding="10dp"
+        android:padding="20dp"
         android:layout_gravity="center_vertical|center_horizontal"
         >
 

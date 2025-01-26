@@ -11,6 +11,7 @@ import com.example.spakujse.model.Stavke;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+// Klasa Podaci pruža funkcionalnosti za upravljanje podacima aplikacije, uključujući inicijalizaciju kategorija, čuvanje podataka u bazi, i resetovanje podataka.
 
 //sadrzi sve podatke koji su potrebni
 public class Podaci extends Application {
@@ -37,7 +38,7 @@ public class Podaci extends Application {
         List<Stavke> osnovneStavke = new ArrayList<>();
         osnovneStavke.add(new Stavke("Pasoš", kategorija, false));
         osnovneStavke.add(new Stavke("Lična karta", kategorija, false));
-        osnovneStavke.add(new Stavke("Vozačka doyvola", kategorija, false));
+        osnovneStavke.add(new Stavke("Vozačka dozvola", kategorija, false));
         osnovneStavke.add(new Stavke("Karte", kategorija, false));
         osnovneStavke.add(new Stavke("Kišobran", kategorija, false));
         osnovneStavke.add(new Stavke("Novčanik", kategorija, false));
@@ -85,6 +86,7 @@ public class Podaci extends Application {
         return listaStavki;
     }
 
+    // Dobavlja podatke za sve kategorije i vraća ih kao listu.
     public List<List<Stavke>> dobaviSvePodatke(){
         List<List<Stavke>> listaSvihPodataka = new ArrayList<>();
         listaSvihPodataka.clear();
@@ -126,6 +128,7 @@ public class Podaci extends Application {
         }
     }
 
+    // Briše podatke za kategoriju i vraća nove podatke za nju.
     private List<Stavke> obrisiIDobaviPoKategoriji(String kategorija, Boolean brisanje){
         if (brisanje){
             bazapodataka.glDao().obrisiSvePoKategorijiIDodato(kategorija, Konstanta.SYSTEM);

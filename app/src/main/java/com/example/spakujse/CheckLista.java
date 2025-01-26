@@ -1,5 +1,7 @@
 package com.example.spakujse;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -28,9 +31,12 @@ import com.example.spakujse.adapter.CheckListaAdapter;
 import com.example.spakujse.baza.RoomBaza;
 import com.example.spakujse.konstante.Konstanta;
 import com.example.spakujse.model.Stavke;
+import com.example.spakujse.podaci.Podaci;
 
 import java.util.ArrayList;
 import java.util.List;
+
+// Klasa CheckLista predstavlja aktivnost koja prikazuje i omogućava upravljanje stavkama u okviru određene kategorije.
 
 public class CheckLista extends AppCompatActivity {
 
@@ -43,12 +49,13 @@ public class CheckLista extends AppCompatActivity {
     Button btnAdd;
     LinearLayout linearLayout;
 
-    //    sakrivanje stavki u meniju u zavisnosti u kojoj smo kategoriji
+    // Metoda za kreiranje menija sa opcijama.
     @Override
     public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
+        //    sakrivanje stavki u meniju u zavisnosti u kojoj smo kategoriji
         if (Konstanta.MOJ_ODABIR.equals(header)){
             menu.getItem(0).setVisible(false);
             menu.getItem(2).setVisible(false);
@@ -68,6 +75,7 @@ public class CheckLista extends AppCompatActivity {
             //            pretraga
             @Override
             public boolean onQueryTextChange(String newText) {
+                // Filtrira stavke na osnovu unetog teksta.
                 List<Stavke> finalList = new ArrayList<>();
                 for (Stavke stavke : stavkeList){
                     if (stavke.getNaziv().toLowerCase().startsWith(newText.toLowerCase())){
@@ -88,9 +96,9 @@ public class CheckLista extends AppCompatActivity {
 //    public boolean onOptionsItemSelected(@NonNull MenuItem stavka) {
 //        Intent intent = new Intent(this, CheckLista.class);
 //        Podaci podaci = new Podaci(bazapodataka, this);
-
-    //        switch (stavka.getItemId()){
-//            case R.id.mojOdabir:
+//
+//            switch (stavka.getItemId()){
+//            case R.id.:
 //                intent.putExtra(Konstanta.HEADER_SMALL, Konstanta.MOJ_ODABIR);
 //                intent.putExtra(Konstanta.SHOW_SMALL, Konstanta.FALSE_STRING);
 //                startActivityForResult(intent,101 );
@@ -139,35 +147,36 @@ public class CheckLista extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_check_lista);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setTitle(header);
         }
 
         Intent intent = getIntent();
         header = intent.getStringExtra(Konstanta.HEADER_SMALL);
         show = intent.getStringExtra(Konstanta.SHOW_SMALL);
         if (actionBar != null) {
-            actionBar.setTitle(header);
+            actionBar.setTitle(header);// Postavlja naslov ActionBar-a.
         }
-//        getSupportActionBar().setTitle(header);
+
         textAdd = findViewById(R.id.textAdd);
         btnAdd = findViewById(R.id.btnAdd);
         recyclerView = findViewById(R.id.recyclerView);
         linearLayout = findViewById(R.id.LinearLayout);
         bazapodataka = RoomBaza.getInstance(this);
+
         if (Konstanta.FALSE_STRING.equals(show)){
             linearLayout.setVisibility(View.GONE);
-            stavkeList = bazapodataka.glDao().dobaviSveSelektovano(true);
+            stavkeList = bazapodataka.glDao().dobaviSveSelektovano(true); // Prikazuje samo selektovane stavke.
         }else {
             stavkeList = bazapodataka.glDao().dobaviSve(header);
         }
         updateRecycler(stavkeList);
 
+        // Klik događaj za dodavanje nove stavke.
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,10 +199,12 @@ public class CheckLista extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        // Završava aktivnost kada korisnik pritisne dugme za povratak.
         finish();
         return true;
     }
 
+    // Metoda za dodavanje nove stavke u bazu podataka.
     private void dodajNovuStavku(String stavkaIme){
         Stavke stavka = new Stavke();
         stavka.setIzabrano(false);
@@ -207,6 +218,7 @@ public class CheckLista extends AppCompatActivity {
         textAdd.setText("");
     }
 
+    // Ažurira RecyclerView sa novom listom stavki.
     private void updateRecycler(List<Stavke> stavkeList){
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));
