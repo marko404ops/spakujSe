@@ -57,12 +57,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                 public void onClick(View view) {
 //                Toast.makeText(activity, "Pritisnuto na boks", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), CheckLista.class);
-                    intent.putExtra(Konstanta.HEADER_SMALL, naslovi.get(position));
+                    intent.putExtra(Konstanta.HEADER, naslovi.get(position));
                     if (Konstanta.MOJ_ODABIR.equals(naslovi.get(position))) {
                         // Ako je izabrana kategorija "Moj Odabir", sakriva stavke.
-                        intent.putExtra(Konstanta.SHOW_SMALL, Konstanta.FALSE_STRING);
+                        intent.putExtra(Konstanta.SHOW, Konstanta.FALSE_STRING);
                     } else {
-                        intent.putExtra(Konstanta.SHOW_SMALL, Konstanta.TRUE_STRING);
+                        intent.putExtra(Konstanta.SHOW, Konstanta.TRUE_STRING);
                     }
                     view.getContext().startActivity(intent);
                 }

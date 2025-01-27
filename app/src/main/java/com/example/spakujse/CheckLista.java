@@ -1,7 +1,5 @@
 package com.example.spakujse;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -31,7 +28,6 @@ import com.example.spakujse.adapter.CheckListaAdapter;
 import com.example.spakujse.baza.RoomBaza;
 import com.example.spakujse.konstante.Konstanta;
 import com.example.spakujse.model.Stavke;
-import com.example.spakujse.podaci.Podaci;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,14 +95,14 @@ public class CheckLista extends AppCompatActivity {
 //
 //            switch (stavka.getItemId()){
 //            case R.id.:
-//                intent.putExtra(Konstanta.HEADER_SMALL, Konstanta.MOJ_ODABIR);
-//                intent.putExtra(Konstanta.SHOW_SMALL, Konstanta.FALSE_STRING);
+//                intent.putExtra(Konstanta.HEADER, Konstanta.MOJ_ODABIR);
+//                intent.putExtra(Konstanta.SHOW, Konstanta.FALSE_STRING);
 //                startActivityForResult(intent,101 );
 //                return true;
 //
 //            case R.id.mojaLista:
-//                intent.putExtra(Konstanta.HEADER_SMALL, Konstanta.MOJA_LISTA);
-//                intent.putExtra(Konstanta.SHOW_SMALL, Konstanta.FALSE_STRING);
+//                intent.putExtra(Konstanta.HEADER, Konstanta.MOJA_LISTA);
+//                intent.putExtra(Konstanta.SHOW, Konstanta.FALSE_STRING);
 //                startActivity(intent);
 //                return true;
 //
@@ -156,8 +152,8 @@ public class CheckLista extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        header = intent.getStringExtra(Konstanta.HEADER_SMALL);
-        show = intent.getStringExtra(Konstanta.SHOW_SMALL);
+        header = intent.getStringExtra(Konstanta.HEADER);
+        show = intent.getStringExtra(Konstanta.SHOW);
         if (actionBar != null) {
             actionBar.setTitle(header);// Postavlja naslov ActionBar-a.
         }
@@ -210,7 +206,7 @@ public class CheckLista extends AppCompatActivity {
         stavka.setIzabrano(false);
         stavka.setKategorija(header);
         stavka.setNaziv(stavkaIme);
-        stavka.setDodato(Konstanta.USER_SMALL);
+        stavka.setDodato(Konstanta.USER);
         bazapodataka.glDao().sacuvajPodatke(stavka);
         stavkeList = bazapodataka.glDao().dobaviSve(header);
         updateRecycler(stavkeList);

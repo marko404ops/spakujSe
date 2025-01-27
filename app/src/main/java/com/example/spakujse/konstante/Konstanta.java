@@ -7,11 +7,11 @@ public class Konstanta {
 
     public static final String FALSE_STRING = "false";
 
-    public static final String HEADER_SMALL = "header";
+    public static final String HEADER = "header";
 
-    public static final String SHOW_SMALL = "show";
+    public static final String SHOW = "show";
 
-    public static final String USER_SMALL = "user";
+    public static final String USER = "user";
 
     public static final String SYSTEM = "system";
 
